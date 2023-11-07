@@ -61,5 +61,9 @@ PING www.cyberciti.biz(2606:4700:10::6816:3fa6 (2606:4700:10::6816:3fa6)) 56 dat
 --- www.cyberciti.biz ping statistics ---
 2 packets transmitted, 2 received, 0% packet loss, time 1001ms
 rtt min/avg/max/mdev = 233.607/234.004/234.402/0.397 ms
+# https://serverfault.com/a/217266
+$ telnet -6 2401:c080:1000:4720:5400:04ff:fea2:3610 12345
+Trying 2401:c080:1000:4720:5400:4ff:fea2:3610...
+Connected to 2401:c080:1000:4720:5400:04ff:fea2:3610.
+Escape character is '^]'.
 ```
-- 

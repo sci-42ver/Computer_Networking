@@ -66,4 +66,10 @@ $ telnet -6 2401:c080:1000:4720:5400:04ff:fea2:3610 12345
 Trying 2401:c080:1000:4720:5400:4ff:fea2:3610...
 Connected to 2401:c080:1000:4720:5400:04ff:fea2:3610.
 Escape character is '^]'.
+# https://superuser.com/a/1664770 probably the server doesn't allow ping.
+$ ping -c 2 -6 2401:c080:1000:4720:5400:04ff:fea2:3610
+PING 2401:c080:1000:4720:5400:04ff:fea2:3610(2401:c080:1000:4720:5400:4ff:fea2:3610) 56 data bytes
+
+--- 2401:c080:1000:4720:5400:04ff:fea2:3610 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1026ms
 ```

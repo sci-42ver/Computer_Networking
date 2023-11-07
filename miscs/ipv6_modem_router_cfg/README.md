@@ -21,12 +21,12 @@ $ telnet 192.168.1.1
 - then config the modem, better ["新建WAN连接"](https://www.youtube.com/watch?v=1cVIXdmPQMA) ([doc](https://www.cnblogs.com/yaoyue68/p/16815152.html)) instead of modifying/deleting the original ["2_INTERNET_R_VID_..."](https://ipw.cn/doc/ipv6/user/enable_ipv6.html)
   1. allow WAN
   then use one wire to collect LAN *binded* on the modem to the WAN in the router.
-  - the router uses [method 1](https://resource.tp-link.com.cn/pc/docCenter/showDoc?id=1655112591200293)
-    (the 2 changes in each method are enough to work)
-    - TODO sometimes I connect directly to the modem, I will get the ipv6 but sometimes not.
-      - maybe influenced by 1_TR..._R_VID...
   - "_R_" [meaning](https://zhuanlan.zhihu.com/p/146528034?utm_id=0) -> relay.
   - different mode like 2_INTERNET_R_VID_... [meaning](https://sspai.com/post/78387)
+- the router uses [method 1](https://resource.tp-link.com.cn/pc/docCenter/showDoc?id=1655112591200293)
+ (the 2 changes in each method are enough to work)
+ - TODO sometimes I connect directly to the modem, I will get the ipv6 but sometimes not.
+   - maybe influenced by 1_TR..._R_VID...
 ## tftp [diff](https://www.geeksforgeeks.org/difference-between-ftp-and-tftp/) ftp
 - ftp [config](https://www.geeksforgeeks.org/how-to-setup-and-configure-an-ftp-server-in-linux-2/)
 ```bash
@@ -40,6 +40,7 @@ $ ftp localhost
 - [flush](https://tecadmin.net/flush-dns-cache-ubuntu/) dns with [preparation](https://superuser.com/a/1427312)
 - notice the ws is not necessary [with tls](https://guide.v2fly.org/en_US/advanced/wss_and_web.html#client-side-configuration) which can be viewed in windows v2rayn exported config if using one subscription.
   Also see this [example](https://github.com/v2fly/v2ray-examples/blob/4cc09a4977169a1c55f668217934da8e0208967a/VMess-Websocket-TLS/config_client.json#L53)
+- Also see real config [json](https://bitbucket.org/czg980/automatic_command/src/3348b916ae847dd11d4745f6efb2df88a13de4c5/arch_linux_init/net_conf/config.json?at=master)
 # result
 - it seems to have one public ipv6 addr now by [test](https://www.test-ipv6.com/)
   > Your IPv6 address on the public Internet appears to be 2409:8a20:120:c620::1000

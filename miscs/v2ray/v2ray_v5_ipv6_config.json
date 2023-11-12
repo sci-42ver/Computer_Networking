@@ -1,0 +1,267 @@
+// Config file of V2Ray. This file follows standard JSON format, with comments support.
+// Uncomment entries below to satisfy your needs. Also read our manual for more detail at
+// https://www.v2fly.org/
+{
+  "log": {
+    // By default, V2Ray writes access log to stdout.
+    // "access": "/path/to/access/log/file",
+    // By default, V2Ray write error log to stdout.
+    // "error": "/path/to/error/log/file",
+    // Log level, one of "debug", "info", "warning", "error", "none"
+    "access": {
+      "type": "File",
+      "path": "/var/log/v2ray/access.log",
+      "level": "Debug"
+    },
+    "error": {
+      "type": "File",
+      "path": "/var/log/v2ray/error.log",
+      "level": "Debug"
+    }
+  },
+  // List of inbound proxy configurations.
+  "inbounds": [
+    {
+      // Port to listen on. You may need root access if the value is less than 1024.
+      "port": 1080,
+      // IP address to listen on. Change to "0.0.0.0" to listen on all network interfaces.
+      "listen": "127.0.0.1",
+      // Tag of the inbound proxy. May be used for routing.
+      "tag": "socks-inbound",
+      // Protocol name of inbound proxy.
+      "protocol": "socks",
+      // Settings of the protocol. Varies based on protocol.
+      "settings": {
+        // "auth": "noauth",
+        "udpEnabled": false,
+        // "ip": "127.0.0.1"
+        "address": "127.0.0.1"
+      },
+      // Enable sniffing on TCP connection.
+      "sniffing": {
+        "enabled": true,
+        // Target domain will be overriden to the one carried by the connection, if the connection is HTTP or HTTPS.
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+    {
+      "port": 1081,
+      "protocol": "http",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      },
+      "listen": "127.0.0.1",
+      "settings": {}
+    }
+  ],
+  // List of outbound proxy configurations.
+  "outbounds": [
+    {
+      // Protocol name of the outbound proxy.
+      "protocol": "freedom",
+      // Settings of the protocol. Varies based on protocol.
+      "settings": {},
+      // Tag of the outbound. May be used for routing.
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    },
+    {
+      "protocol": "vmess",
+      "tag": "proxy",
+      "settings": {
+        "address": "foo",
+        "port": 12345,
+        "uuid": "foo"
+      },
+      "streamSettings": {
+        "transport": "ws",
+        "transportSettings": {
+          "path": "/foo"
+        }
+      }
+    }
+  ],
+  // Transport is for global transport settings. If you have multiple transports with same settings
+  // (say mKCP), you may put it here, instead of in each individual inbound/outbounds.
+  //"transport": {},
+  // Routing controls how traffic from inbounds are sent to outbounds.
+  "router": {
+    // "domainStrategy": "IpIfNonMatch",
+    // "domainStrategy": "UseIp",
+    "domainStrategy": "AsIs",
+    "rule": [
+      // since I always use the proxy, so the order is proxy -> block -> direct domain -> direct ip -> direct port
+      // here we can just use the direct port without ip and domain.
+      // proxy geoDomain
+      {
+        "tag": "proxy",
+        "geoDomain": [
+          {
+            "code": "telegram",
+            "filePath": "../../usr/share/v2ray/geosite.dat"
+          },
+          {
+            "code": "geolocation-!cn",
+            "filePath": "../../usr/share/v2ray/geosite.dat"
+          },
+          {
+            "domain": [
+              {
+                "type": "Plain",
+                "value": "mastodon"
+              }
+            ]
+          }
+        ]
+      },
+      // block geodomain
+      {
+        // Blocks major ads.
+        "geoDomain": [
+          {
+            "code": "category-ads",
+            "filePath": "../../usr/share/v2ray/geosite.dat"
+          },
+          {
+            "domain": [
+              {
+                "type": "Plain",
+                "value": "v4"
+              }
+            ]
+          }
+        ],
+        "tag": "blocked"
+      },
+
+      // direct geodomain
+      // {
+      //   "tag": "direct",
+      //   "geoDomain": [
+      //     //   {
+      //     //     "code": "test-ipv6",
+      //     //     "filePath": "../../usr/share/v2ray/geosite.dat"
+      //     //   },
+      //     {
+      //       "domain": [
+      //         {
+      //           "type": "Plain",
+      //           "value": "speedtest"
+      //         },
+      //         {
+      //           "type": "RootDomain",
+      //           "value": "gnu.org"
+      //         },
+      //         {
+      //           "type": "Plain",
+      //           "value": "ipv6"
+      //         }
+      //         // {
+      //         //   "type": "Regex",
+      //         //   "value": "\\..*ipv6.*"
+      //         // }
+      //       ]
+      //     }
+      //   ]
+      // },
+      // // direct geoip
+      // {
+      //   "tag": "direct",
+      //   // notice geoip, domain can't be in the same context
+      //   "geoip": [
+      //     {
+      //       "code": "private",
+      //       "inverseMatch": false,
+      //       "filePath": "../../usr/share/v2ray/geoip.dat"
+      //     },
+      //     {
+      //       "inverseMatch": false,
+      //       "cidr": [
+      //         {
+      //           "ipAddr": "192.168.0.0",
+      //           "prefix": 16
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       "code": "cn",
+      //       "inverseMatch": false,
+      //       "filePath": "../../usr/share/v2ray/geoip.dat"
+      //     }
+      //   ]
+      // },
+
+      // the rest all direct
+      {
+        "tag": "direct",
+        "portList": "0-65535"
+      }
+    ]
+  },
+  // Dns settings for domain resolution.
+  "dns": {
+    "nameServer": [
+      {
+        "address": {
+          "address": "2001:4860:4860:0:0:0:0:8888",
+          "port": 53
+        },
+        "clientIp": "5.6.7.8",
+        "prioritizedDomain": [
+          {
+            "type": "Subdomain",
+            "domain": "youtube.com"
+          },
+          {
+            "type": "Keyword",
+            "domain": "google"
+          }
+        ]
+      }
+    ],
+    "clientIp": "1.2.3.4",
+    "staticHosts": [
+      {
+        "type": "Full",
+        "domain": "cloudflare.com",
+        "ip": [
+          "1.1.1.1",
+          "1.0.0.1"
+        ]
+      },
+      {
+        "type": "Full",
+        "domain": "cloudflare.com",
+        "proxiedDomain": "api.v2fly.org"
+      }
+    ],
+    "fakeDns": {
+      "pools": [
+        {
+          "ipPool": "192.168.0.0/8", // http://192.168.0.1/
+          "lruSize": 65535
+        },
+        {
+          "ipPool": "fc00::/18",
+          "lruSize": 65535
+        }
+      ]
+    },
+    "domainMatcher": "mph",
+    "queryStrategy": "USE_IP6",
+    "cacheStrategy": "CacheEnabled",
+    "disableCache": false,
+    "tag": "dns"
+  }
+}

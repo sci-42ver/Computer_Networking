@@ -145,31 +145,32 @@ app/dispatcher: taking detour [direct] for [tcp:v4.ipv6-test.com:443]
 ```
 # miscs
 - one [possible bug](https://github.com/v2fly/v2ray-core/discussions/2755) has been fixed in v5
-```json
-  "router": {
-    "domainStrategy": "IpIfNonMatch",
-    // "domainStrategy": "UseIp",
-    // "domainStrategy": "AsIs",
-    "rule": [
-      {
-        "tag": "direct",
-        "domain": [
-          {
-            "type": "Plain",
-            "value": "ipv6"
-          }
-        ]
-      },
-      ...
-    ]
-  }
-```
-  will output
+  ```json
+    "router": {
+      "domainStrategy": "IpIfNonMatch",
+      // "domainStrategy": "UseIp",
+      // "domainStrategy": "AsIs",
+      "rule": [
+        {
+          "tag": "direct",
+          "domain": [
+            {
+              "type": "Plain",
+              "value": "ipv6"
+            }
+          ]
+        },
+        ...
+      ]
+    }
+  ```
+    will output
 ```bash
 $ sudo vim /var/log/v2ray/error.log
-# search DNS, mostly not go through DNS and just use the domain to match the rules
+# search DNS only shows the following. Most of requests do not go through DNS and just use the domain to match the rules
 2023/11/12 17:19:57 [Info] app/dns: DNS: created UDP client initialized for [2001:4860:4860::8888]:53
 2023/11/12 17:19:57 [Info] app/dns: DNS: client [2001:4860:4860::8888] uses clientIP 5.6.7.8 
 ```
 # notice
 - the routing rule [order](https://github.com/Loyalsoldier/v2ray-rules-dat#geositedat-1) matters
+- v2ray's [successor](https://github.com/v2ray/v2ray-core#readme) v2fly referenced [here](https://github.com/v2fly/v2ray-core/discussions/2736#discussioncomment-7467158)

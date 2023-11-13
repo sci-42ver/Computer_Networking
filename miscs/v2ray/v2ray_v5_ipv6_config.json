@@ -101,8 +101,59 @@
     // "domainStrategy": "UseIp",
     "domainStrategy": "AsIs",
     "rule": [
-      // since I always use the proxy, so the order is proxy -> block -> direct domain -> direct ip -> direct port
+      // since I always use the proxy and to block some addresses instead of proxy them,
+      // also some domains have many location versions like ipv6-test.com with ipv6.ipv6-test.pl (https://ipgeolocation.io/ip-location/www.ipv6-test.com)
+      // so the order is block -> some special direct ip/domain -> proxy -> direct domain -> direct ip -> direct port
       // here we can just use the direct port without ip and domain.
+      // block geodomain
+      {
+        // Blocks major ads.
+        "tag": "blocked",
+        "geoDomain": [
+          {
+            "code": "category-ads",
+            "filePath": "../../usr/share/v2ray/geosite.dat"
+          },
+          {
+            "domain": [
+              {
+                "type": "Plain",
+                "value": "v4"
+              }
+            ]
+          }
+        ]
+      },
+      // direct geodomain
+      {
+        "tag": "direct",
+        "geoDomain": [
+          //   {
+          //     "code": "test-ipv6",
+          //     "filePath": "../../usr/share/v2ray/geosite.dat"
+          //   },
+          {
+            "domain": [
+              {
+                "type": "Plain",
+                "value": "speedtest"
+              },
+              {
+                "type": "RootDomain",
+                "value": "gnu.org" // match static.gnu.org or www.gnu.org
+              },
+              {
+                "type": "Plain",
+                "value": "ipv6"
+              }
+              // {
+              //   "type": "Regex",
+              //   "value": "\\..*ipv6.*"
+              // }
+            ]
+          }
+        ]
+      },
       // proxy geoDomain
       {
         "tag": "proxy",
@@ -125,56 +176,6 @@
           }
         ]
       },
-      // block geodomain
-      {
-        // Blocks major ads.
-        "geoDomain": [
-          {
-            "code": "category-ads",
-            "filePath": "../../usr/share/v2ray/geosite.dat"
-          },
-          {
-            "domain": [
-              {
-                "type": "Plain",
-                "value": "v4"
-              }
-            ]
-          }
-        ],
-        "tag": "blocked"
-      },
-
-      // direct geodomain
-      // {
-      //   "tag": "direct",
-      //   "geoDomain": [
-      //     //   {
-      //     //     "code": "test-ipv6",
-      //     //     "filePath": "../../usr/share/v2ray/geosite.dat"
-      //     //   },
-      //     {
-      //       "domain": [
-      //         {
-      //           "type": "Plain",
-      //           "value": "speedtest"
-      //         },
-      //         {
-      //           "type": "RootDomain",
-      //           "value": "gnu.org"
-      //         },
-      //         {
-      //           "type": "Plain",
-      //           "value": "ipv6"
-      //         }
-      //         // {
-      //         //   "type": "Regex",
-      //         //   "value": "\\..*ipv6.*"
-      //         // }
-      //       ]
-      //     }
-      //   ]
-      // },
       // // direct geoip
       // {
       //   "tag": "direct",
@@ -201,7 +202,6 @@
       //     }
       //   ]
       // },
-
       // the rest all direct
       {
         "tag": "direct",

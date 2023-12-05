@@ -174,3 +174,4 @@ $ sudo vim /var/log/v2ray/error.log
 # notice
 - the routing rule [order](https://github.com/Loyalsoldier/v2ray-rules-dat#geositedat-1) matters
 - v2ray's [successor](https://github.com/v2ray/v2ray-core#readme) v2fly referenced [here](https://github.com/v2fly/v2ray-core/discussions/2736#discussioncomment-7467158)
+- The json files, see commit "1941056aed5ec4d5153eb7dd10b6de93eb487643"

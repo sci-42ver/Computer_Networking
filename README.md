@@ -5,3 +5,5 @@
   - https://dn42.keuin.cc/
 - https://ani.llc/networking
 - Internet autonomous system
+- what is [bouncer](https://community.scheme.org/)
+- diff [between email system and mail server](https://matrix.org/docs/older/faq/).

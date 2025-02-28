@@ -41,7 +41,7 @@ $ ftp localhost
 - [flush](https://tecadmin.net/flush-dns-cache-ubuntu/) dns with [preparation](https://superuser.com/a/1427312)
 - notice the ws is not necessary [with tls](https://guide.v2fly.org/en_US/advanced/wss_and_web.html#client-side-configuration) which can be viewed in windows v2rayn exported config if using one subscription.
   Also see this [example](https://github.com/v2fly/v2ray-examples/blob/4cc09a4977169a1c55f668217934da8e0208967a/VMess-Websocket-TLS/config_client.json#L53)
-- Also see real config [json](https://bitbucket.org/czg980/automatic_command/src/3348b916ae847dd11d4745f6efb2df88a13de4c5/arch_linux_init/net_conf/config.json?at=master)
+- Also see real config [json](https://bitbucket.org/anom_mony/automatic_command/src/3348b916ae847dd11d4745f6efb2df88a13de4c5/arch_linux_init/net_conf/config.json?at=master)
 # result
 - it seems to have one public ipv6 addr now by [test](https://www.test-ipv6.com/)
   > Your IPv6 address on the public Internet appears to be 2409:8a20:120:c620::1000
@@ -115,7 +115,7 @@ ping: sock4.fd: -1 (socktype: 0), sock6.fd: 3 (socktype: SOCK_DGRAM), hints.ai_f
 
 ai->ai_family: AF_INET6, ai->ai_canonname: 'www.cyberciti.biz'
 PING www.cyberciti.biz(2606:4700:10::6816:3ea6) 56 data bytes
-[czg_arch ~/Computer_Networking]$ whois 2606:4700:10::ac43:1803
+[hervey_arch ~/Computer_Networking]$ whois 2606:4700:10::ac43:1803
 OrgName:        Cloudflare, Inc.
 OrgId:          CLOUD14
 Address:        101 Townsend Street
@@ -165,7 +165,7 @@ www.a.shifen.com.
 36.155.132.55
 36.155.132.31
 # TODO why different between ping , dig based on resolv.conf and traceroute
-[czg_arch ~/Computer_Networking]$ ping baidu.com       
+[hervey_arch ~/Computer_Networking]$ ping baidu.com       
 PING baidu.com (39.156.66.10) 56(84) bytes of data.
 $ traceroute baidu.com
 traceroute to baidu.com (110.242.68.66), 30 hops max, 60 byte packets

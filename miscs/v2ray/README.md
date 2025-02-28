@@ -12,7 +12,7 @@
           }
         ]
 // this is wrong, will throw 
-// Test failed: main/commands: failed to load config: [/home/czg_arch/v2ray_v5_ipv6_config.json] > infra/conf/v5cfg: unable to build config > infra/conf/v5cfg: failed to parse Router config > common/registry: unable to parse json content > json: cannot unmarshal object into Go value of type []json.RawMessage
+// Test failed: main/commands: failed to load config: [/home/hervey_arch/v2ray_v5_ipv6_config.json] > infra/conf/v5cfg: unable to build config > infra/conf/v5cfg: failed to parse Router config > common/registry: unable to parse json content > json: cannot unmarshal object into Go value of type []json.RawMessage
         "domain":
           {
             "type": "Full",
@@ -99,7 +99,7 @@
     // },
 }
 ```
-- `Test failed: main/commands: failed to load config: [/home/czg_arch/v2ray_v5_ipv6_config.json] > infra/conf/v5cfg: unable to build config > infra/conf/v5cfg: failed to parse DNS config > common/registry: unable to parse json content > unknown field "expectIPs" in v2ray.core.app.dns.SimplifiedNameServer` for `expectIPs`
+- `Test failed: main/commands: failed to load config: [/home/hervey_arch/v2ray_v5_ipv6_config.json] > infra/conf/v5cfg: unable to build config > infra/conf/v5cfg: failed to parse DNS config > common/registry: unable to parse json content > unknown field "expectIPs" in v2ray.core.app.dns.SimplifiedNameServer` for `expectIPs`
 - policy in v5
 ```json
 // Policy controls some internal behavior of how V2Ray handles connections.
